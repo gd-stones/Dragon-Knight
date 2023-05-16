@@ -14,6 +14,8 @@ public class Door : MonoBehaviour
         {
             if (collision.transform.position.x < transform.position.x)
             {
+                //print(collision.transform.position.x);
+                //print(transform.position.x);
                 cam.MoveToNewRoom(nextRoom);
             }
             else

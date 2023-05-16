@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [Header ("Health")]
+    [Header("Health")]
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
     private Animator anim;
@@ -62,7 +62,6 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOffFlashes));
             spriteRend.color = Color.white;
             yield return new WaitForSeconds(iFramesDuration / (numberOffFlashes));
-
         }
         Physics2D.IgnoreLayerCollision(10, 11, false);
     }

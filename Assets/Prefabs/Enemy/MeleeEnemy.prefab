@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5017138321579215586}
   - component: {fileID: 5017138321579215587}
   - component: {fileID: 5017138321579215584}
+  - component: {fileID: 5517328961902280646}
   m_Layer: 11
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -28,9 +29,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5017138321579215612}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5, y: -0.8, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -149,6 +150,8 @@ MonoBehaviour:
   startingHealth: 3
   iFramesDuration: 0
   numberOffFlashes: 0
+  components:
+  - {fileID: 5017138321579215584}
 --- !u!114 &5017138321579215584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,11 +164,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b420e0dd84d434981f5442f457b7d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 1
+  attackCooldown: 2
   range: 2.5
-  colliderDistance: 0.5
-  damage: 2
+  damage: 1
+  colliderDistance: 0.4
   boxCollider: {fileID: 5017138321579215586}
   playerLayer:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &5517328961902280646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017138321579215612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f475a91c3ae1ba41a32c07c47f19018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1

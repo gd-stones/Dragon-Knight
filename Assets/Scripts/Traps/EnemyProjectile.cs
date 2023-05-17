@@ -31,6 +31,7 @@ public class EnemyProjectile : EnemyDamage // will damage the player every time 
     {
         if (hit) return; 
         float movementSpeed = speed * Time.deltaTime;
+        //print(movementSpeed);
         transform.Translate(movementSpeed, 0, 0);
 
         lifetime += Time.deltaTime;

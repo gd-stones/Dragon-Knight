@@ -80,9 +80,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded())
         {
-            SoundManager.instance.PlaySound(jumpSound);
-            body.velocity = new Vector2(body.velocity.x, jumpPower);
             anim.SetTrigger("jump");
+            body.velocity = new Vector2(body.velocity.x, jumpPower);
         }
         else if (onWall() && !isGrounded())
         {

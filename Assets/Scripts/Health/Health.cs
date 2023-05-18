@@ -48,34 +48,18 @@ public class Health : MonoBehaviour
         else
         {
             //player dead
-            if (!dead)
+            if (!dead) 
             {
-                anim.SetTrigger("die");
-
-                ////Player
-                //if (GetComponent<PlayerMovement>() != null)
-                //{
-                //    GetComponent<PlayerMovement>().enabled = false;
-                //}
-
-                ////Enemy
-                //if (GetComponentInParent<EnemyPatrol>() != null)
-                //{
-                //    GetComponentInParent<EnemyPatrol>().enabled = false;
-                //}
-
-                //if (GetComponent<MeleeEnemy>() != null)
-                //{
-                //    GetComponent<MeleeEnemy>().enabled = false;
-                //}
-
                 //deactivate all attached component classes
                 foreach (Behaviour component in components)
                 {
                     component.enabled = false; 
                 }
-                dead = true;
 
+                anim.SetBool("grounded", true);
+                anim.SetTrigger("die");
+               
+                dead = true;
                 SoundManager.instance.PlaySound(deathSound);
             }
         }

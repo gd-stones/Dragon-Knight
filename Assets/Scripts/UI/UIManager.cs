@@ -5,14 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Game Over")]
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private AudioClip gameOverSound;
+
+    [Header("Pause")]
+    [SerializeField] private GameObject pauseScreen;
+
 
     private void Awake()
     {
         gameOverScreen.SetActive(false);
+        pauseScreen.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseScreen.activeInHierarchy)
+            {
+                PauseGame(false);
+            }
+            else
+            {
+                PauseGame(true);
+            }
+        }
+    }
+
+    #region Game Over
     //activate game over screen
     public void GameOver()
     {
@@ -34,6 +56,37 @@ public class UIManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit(); //quits the game (only works on build)
-        UnityEditor.EditorApplication.isPlaying = false; //exits play mode
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; //exits play mode (will only be executed in the editor)
+#endif
     }
+    #endregion
+
+    #region Pause
+    public void PauseGame(bool status)
+    {
+        //if status == true -> pause
+        pauseScreen.SetActive(status);
+        
+        //when pause status is true change timescale to 0 (time stops) 
+        if (status)
+        {
+            Time.timeScale = 0;
+        }else
+        {
+            Time.timeScale = 1;
+        }
+    }
+
+    public void SoundVolume()
+    {
+        SoundManager.instance.ChangeSoundVolume(0.2f);
+    }
+
+    public void MusicVolume()
+    {
+        SoundManager.instance.ChangeMusicVolume(0.2f);
+    }
+    #endregion
 }

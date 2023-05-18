@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
 
     private Animator anim;
     private BoxCollider2D boxCollider;
-
+    
     private void Awake()
     {
         anim = GetComponent<Animator>();

@@ -15,6 +15,6 @@ public class Win : MonoBehaviour
     IEnumerator ShowWinScreenAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(SceneManager.sceneCount - 1);
     }
 }

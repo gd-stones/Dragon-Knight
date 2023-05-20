@@ -11,12 +11,20 @@ public class UIManager : MonoBehaviour
 
     [Header("Pause")]
     [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private GameObject mobileController;
 
 
     private void Awake()
     {
         gameOverScreen.SetActive(false);
         pauseScreen.SetActive(false);
+
+    }
+
+    private void Start()
+    {
+#if UNITY_STANDALONE
+#endif
     }
 
     private void Update()

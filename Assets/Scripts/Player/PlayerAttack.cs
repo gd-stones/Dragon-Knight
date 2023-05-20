@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
     private Animator anim;
     private PlayerMovement playerMovement;
     private float cooldownTimer = Mathf.Infinity;
+    public float attackOffset;
 
     private void Awake()
     {
@@ -21,14 +22,23 @@ public class PlayerAttack : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
     }
 
+    private void Start()
+    {
+#if !UNITY_STANDALONE
+        InvokeRepeating(nameof(Attack), 0, attackOffset);
+#endif
+    }
+
     private void Update()
     {
+#if UNITY_STANDALONE
         if (Input.GetMouseButton(0) && (cooldownTimer > attackCooldown) && playerMovement.canAttack())
         {
             Attack();
         }
 
         cooldownTimer += Time.deltaTime;
+#endif
     }
 
     private void Attack()

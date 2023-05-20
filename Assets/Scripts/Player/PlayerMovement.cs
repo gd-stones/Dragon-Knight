@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //Explain code - https://chat.openai.com/c/8338f62a-d917-4560-9c34-5fcbd93efe98
 public class PlayerMovement : MonoBehaviour
@@ -33,17 +34,40 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField] private AudioClip jumpSound;
+    protected PlayerActionsExample playerInput;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+        playerInput = new PlayerActionsExample();
+    }
+
+    public void ChangeDirection(float value)
+    {
+        horizontalInput = value;
+    }
+
+    public void ResetDirection()
+    {
+        horizontalInput = 0f;
     }
 
     private void Update()
     {
+#if UNITY_EDITOR
         horizontalInput = Input.GetAxis("Horizontal");
+#endif
+
+        //        Vector2 movement = playerInput.Player.Move.ReadValue<Vector2>();
+        //        Debug.Log(movement);
+
+        //#if UNITY_STANDALONE
+        //        horizontalInput = Input.GetAxis("Horizontal");
+        //#else
+        //        horizontalInput = movement.x;
+        //#endif
 
         // Flip player when moving left-right https://youtu.be/Gf8LOFNnils?list=PLgOEwFbvGm5o8hayFB6skAfa8Z-mw4dPV&t=277
         if (horizontalInput > 0.01f)
@@ -95,11 +119,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Jump()
-    {
-        //if coyote counter is 0 or less and not on the wall and don't have any extra jumps don't do anything
-        if (coyoteCounter <= 0 && !onWall() && jumpCounter <= 0) { return; }
 
+    public bool CanJump()
+    {
+        if (coyoteCounter <= 0 && !onWall() && jumpCounter <= 0) return false;
+        return true;
+    }
+
+    public void Jump()
+    {
         SoundManager.instance.PlaySound(jumpSound);
         anim.SetTrigger("jump");
 

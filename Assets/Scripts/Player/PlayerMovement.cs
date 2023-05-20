@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        // Set animator parameters
+        //Set animator parameters
         anim.SetBool("run", horizontalInput != 0);
         anim.SetBool("grounded", isGrounded());
 
@@ -63,12 +63,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
+            //print("Jump();");
         }
 
         //Adjustable jump height
         if (Input.GetKeyUp(KeyCode.Space) && body.velocity.y > 0)
         {
             body.velocity = new Vector2(body.velocity.x, body.velocity.y / 2);
+            //print("Input.GetKeyUp(KeyCode.Space) && body.velocity.y > 0");
         }
 
         if (onWall())
@@ -96,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         //if coyote counter is 0 or less and not on the wall and don't have any extra jumps don't do anything
-        if (coyoteCounter <= 0 && !onWall() && jumpCounter <=0) { return; } 
+        if (coyoteCounter <= 0 && !onWall() && jumpCounter <= 0) { return; }
 
         SoundManager.instance.PlaySound(jumpSound);
         anim.SetTrigger("jump");
@@ -117,12 +119,15 @@ public class PlayerMovement : MonoBehaviour
                 if (coyoteCounter > 0)
                 {
                     body.velocity = new Vector2(body.velocity.x, jumpPower);
-                }else
+                    //print("coyoteCounter > 0");
+                }
+                else
                 {
                     if (jumpCounter > 0) //if we have extra jumps then jump and decrease the jump counter
                     {
-                        body.velocity = new Vector2 (body.velocity.x, jumpPower);
-                        jumpCounter --;
+                        //print("jumpCounter > 0");
+                        body.velocity = new Vector2(body.velocity.x, jumpPower);
+                        jumpCounter--;
                     }
                 }
             }
